@@ -11,7 +11,8 @@ export const downloadChannelData = async (channelUrl, maxVideos, onProgress) => 
     console.log('Requesting channel data from server...');
     onProgress?.(10);
     
-    const response = await fetch('/api/youtube/download', {
+    const apiUrl = process.env.REACT_APP_API_URL || '';
+    const response = await fetch(`${apiUrl}/api/youtube/download`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -102,7 +103,8 @@ export const downloadChannelDataToJson = async (channelUrl, maxVideos, onProgres
 
   // Save to public folder on the server so it persists and can be fetched
   try {
-    await fetch('/api/youtube/save-public', {
+    const apiUrl = process.env.REACT_APP_API_URL || '';
+    await fetch(`${apiUrl}/api/youtube/save-public`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ data, filename }),

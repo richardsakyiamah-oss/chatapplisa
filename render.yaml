@@ -13,11 +13,13 @@ services:
     envVars:
       - key: MONGODB_URI
         sync: false   # set manually in the Render dashboard
+      - key: YOUTUBE_API_KEY
+        sync: false   # set manually in the Render dashboard
 
   # ── Frontend: React static site ────────────────────────────────────────────
-  - type: static
+  - type: web
     name: chatapp-frontend
-    plan: free
+    runtime: static
     buildCommand: npm install && ./node_modules/.bin/react-scripts build
     staticPublishPath: ./build
     envVars:
